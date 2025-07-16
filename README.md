@@ -91,18 +91,18 @@ streamlit run app.py
 This will open the Streamlit application in your web browser.
 ## 💡 Usage
 
-    - **Upload PDFs**: On the left sidebar of the Streamlit application, use the "Upload PDF documents here" section to upload your physics-related PDF documents. These documents will be used as the knowledge base for the chatbot.
-    - **Ask Questions**: Type your physics-related questions into the chat input box at the bottom of the page and press Enter.
-    - **Receive Answers**: The chatbot will process your query, retrieve relevant information from the uploaded PDFs, and generate a concise answer.
-    - **Maintain Conversation**: The chatbot will remember previous turns in the conversation to provide more contextually relevant responses.
+-   **Upload PDFs**: On the left sidebar of the Streamlit application, use the "Upload PDF documents here" section to upload your physics-related PDF documents. These documents will be used as the knowledge base for the chatbot.
+-   **Ask Questions**: Type your physics-related questions into the chat input box at the bottom of the page and press Enter.
+-   **Receive Answers**: The chatbot will process your query, retrieve relevant information from the uploaded PDFs, and generate a concise answer.
+-   **Maintain Conversation**: The chatbot will remember previous turns in the conversation to provide more contextually relevant responses.
 
 ## 🧠 How it Works (RAG Pipeline)
 
 The chatbot employs a Retrieval-Augmented Generation (RAG) architecture:
 
-    - **Document Loading**: PDF files are uploaded by the user, and their text content is extracted using PyPDF2.
-    - **Text Chunking**: The extracted text is divided into smaller, fixed-size chunks (e.g., 512 characters). This helps in managing context size and focusing on specific pieces of information.
-    - **Retrieval**: When a user asks a question, the system uses TfidfVectorizer and cosine_similarity from scikit-learn to find the top_k (default 3) most relevant text chunks from the entire corpus of uploaded documents. This ensures that only pertinent information is passed to the language model.
-    - **Augmentation**: The retrieved relevant chunks, along with the user's query and a system prompt, are combined to form a comprehensive context. This augmented context is then sent to the Groq language model.
-    - **Generation**: The Groq llama3-8b-8192 model generates a natural language response based on the provided context and query. The system prompt guides the model to act as a physics expert and to handle non-physics queries appropriately.
-    - **Conversational Memory**: A deque (double-ended queue) is used to maintain a limited history of previous assistant responses, which are included in the context for subsequent queries to enable conversational flow.
+-   **Document Loading**: PDF files are uploaded by the user, and their text content is extracted using PyPDF2.
+-   **Text Chunking**: The extracted text is divided into smaller, fixed-size chunks (e.g., 512 characters). This helps in managing context size and focusing on specific pieces of information.
+-   **Retrieval**: When a user asks a question, the system uses TfidfVectorizer and cosine_similarity from scikit-learn to find the top_k (default 3) most relevant text chunks from the entire corpus of uploaded documents. This ensures that only pertinent information is passed to the language model.
+-   **Augmentation**: The retrieved relevant chunks, along with the user's query and a system prompt, are combined to form a comprehensive context. This augmented context is then sent to the Groq language model.
+-   **Generation**: The Groq llama3-8b-8192 model generates a natural language response based on the provided context and query. The system prompt guides the model to act as a physics expert and to handle non-physics queries appropriately.
+-   **Conversational Memory**: A deque (double-ended queue) is used to maintain a limited history of previous assistant responses, which are included in the context for subsequent queries to enable conversational flow.
