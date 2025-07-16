@@ -1,0 +1,6 @@
+groq
+PyPDF2
+scikit-learn
+numpy
+streamlit
+tiktoken
